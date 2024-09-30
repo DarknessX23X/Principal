@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>Liberação de WIFI</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}" />
+  <script src ="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin-top: -50px; /* Ajuste de margem para alinhar verticalmente */
+      font-weight: bold;
+    }
+
+    .custom-btn {
+      background-color: white; /* altere a cor de fundo */
+      color:rgb(35, 16, 75); /* altere a cor do texto */
+      position: center;      
+    }    
+
+    .custom-container {
+      border: 5px solid purple;
+      padding: 10px; /* Opcional para adicionar espaço interno */
+      background-color:white;
+    }
+
+    .custom-label {
+      color:white;
+      font-family: 'ColesHapticExBd';
+    }
+    .image-container {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+      color: white;
+      position: center;
+      /* Adicionado para posicionar a imagem à esquerda */
+    }
+    
+    .image-container img {
+      width: 10%;     
+    }
+
+    
+
+    .import-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }  
+        
+    @font-face {
+      font-family: 'ColesHapticExBd';
+      src: url('../static/ColesHapticExBd.ttf') format('truetype');
+      /* ajuste o caminho e o formato do arquivo de fonte conforme necessário */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;      
+      background-image: url("https://www.bleepstatic.com/content/hl-images/2023/12/11/pf-sense.jpg");
+      background-size: auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      color:white;
+      /* use o nome da fonte definido no @font-face */
+    }    
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+      </style>
+  </head>
+  <body>
+    <div class="center-container">
+      <div class="card-content custom-container"> 
+        <form action="/open_program" method="POST" enctype="multipart/form-data">
+          <center><img src ="https://upload.wikimedia.org/wikipedia/commons/thumb/b/b9/PfSense_logo.png/1200px-PfSense_logo.png" width="200px"> 
+          <input type="text" name="mac" placeholder="Digite o MAC ADDRESS">
+          <input type="text" name="nome" placeholder="Digite o Nome">
+          <input type="text" name="desc" placeholder="Digite a Descricao">
+          
+      <select name="opcoes">
+        {% for option in options %}
+          <option value="{{ option }}">{{ option }}</option>
+        {% endfor %}
+      </select>
+      <button class="btn waves-effect waves-light custom-btn import-text" type="submit" name="acao">Liberar WIFI
+        <i class="material-icons left">signal_wifi_4_bar</i></button></center>
+      </form>
+    </div>
+  </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+      $(document).ready(function() {
+        $('select').formSelect();
+      });
+    </script>
+  </body>
+</html>
