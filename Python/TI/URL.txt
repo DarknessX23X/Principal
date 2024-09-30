@@ -1,0 +1,3 @@
+https://download.anydesk.com/AnyDesk.exe
+https://uvnc.eu/download/1500/UltraVNC_1500_X64_dev_Setup.exe
+http://www.bhan.com.br/jti50/ua-client.windows.exe

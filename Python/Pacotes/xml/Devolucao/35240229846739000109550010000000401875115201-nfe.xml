@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<nfeProc versao="4.00" xmlns="http://www.portalfiscal.inf.br/nfe">
+	<NFe xmlns="http://www.portalfiscal.inf.br/nfe">
+		<infNFe Id="NFe35240229846739000109550010000000401875115201" versao="4.00">
+			<ide>
+				<cUF>35</cUF>
+				<cNF>87511520</cNF>
+				<natOp>Devolucao de mercadorias</natOp>
+				<mod>55</mod>
+				<serie>1</serie>
+				<nNF>40</nNF>
+				<dhEmi>2024-02-08T08:57:06-03:00</dhEmi>
+				<dhSaiEnt>2024-02-08T08:57:06-03:00</dhSaiEnt>
+				<tpNF>0</tpNF>
+				<idDest>2</idDest>
+				<cMunFG>3506003</cMunFG>
+				<tpImp>1</tpImp>
+				<tpEmis>1</tpEmis>
+				<cDV>1</cDV>
+				<tpAmb>1</tpAmb>
+				<finNFe>4</finNFe>
+				<indFinal>1</indFinal>
+				<indPres>9</indPres>
+				<indIntermed>0</indIntermed>
+				<procEmi>0</procEmi>
+				<verProc>Bling 1.0</verProc>
+				<NFref>
+					<refNFe>35240129846739000109550090000060921278877633</refNFe>
+				</NFref>
+			</ide>
+			<emit>
+				<CNPJ>29846739000109</CNPJ>
+				<xNome>FULVIO DE MATOS</xNome>
+				<enderEmit>
+					<xLgr>Rua Virgilio Malta</xLgr>
+					<nro>2-23</nro>
+					<xCpl>SALA 1</xCpl>
+					<xBairro>Centro</xBairro>
+					<cMun>3506003</cMun>
+					<xMun>Bauru</xMun>
+					<UF>SP</UF>
+					<CEP>17010240</CEP>
+					<cPais>1058</cPais>
+					<xPais>Brasil</xPais>
+					<fone>1432989898</fone>
+				</enderEmit>
+				<IE>209780989116</IE>
+				<CRT>1</CRT>
+			</emit>
+			<dest>
+				<CPF>55234704300</CPF>
+				<xNome>Marcio Frazao</xNome>
+				<enderDest>
+					<xLgr>Avenida Nossa Senhora de Fatima</xLgr>
+					<nro>917</nro>
+					<xCpl>Em frente a Flor do Carmelo Eventos</xCpl>
+					<xBairro>Centro</xBairro>
+					<cMun>2208304</cMun>
+					<xMun>Piracuruca</xMun>
+					<UF>PI</UF>
+					<CEP>64240000</CEP>
+					<cPais>1058</cPais>
+					<xPais>Brasil</xPais>
+					<fone>6999981370</fone>
+				</enderDest>
+				<indIEDest>9</indIEDest>
+				<email>ideris_nf@outpost.com.br</email>
+			</dest>
+			<det nItem="1">
+				<prod>
+					<cProd>113262</cProd>
+					<cEAN>SEM GTIN</cEAN>
+					<xProd>Calca Masculina Skinny Bravus Destroyed Indigo 38</xProd>
+					<NCM>62034200</NCM>
+					<CFOP>2202</CFOP>
+					<uCom>UN</uCom>
+					<qCom>1.0000</qCom>
+					<vUnCom>139.00</vUnCom>
+					<vProd>139.00</vProd>
+					<cEANTrib>SEM GTIN</cEANTrib>
+					<uTrib>UN</uTrib>
+					<qTrib>1.0000</qTrib>
+					<vUnTrib>139.00</vUnTrib>
+					<indTot>1</indTot>
+					<nItemPed>1</nItemPed>
+				</prod>
+				<imposto>
+					<vTotTrib>43.72</vTotTrib>
+					<ICMS>
+						<ICMSSN102>
+							<orig>0</orig>
+							<CSOSN>400</CSOSN>
+						</ICMSSN102>
+					</ICMS>
+					<PIS>
+						<PISOutr>
+							<CST>99</CST>
+							<vBC>0.00</vBC>
+							<pPIS>0.00</pPIS>
+							<vPIS>0.00</vPIS>
+						</PISOutr>
+					</PIS>
+					<COFINS>
+						<COFINSOutr>
+							<CST>99</CST>
+							<vBC>0.00</vBC>
+							<pCOFINS>0.00</pCOFINS>
+							<vCOFINS>0.00</vCOFINS>
+						</COFINSOutr>
+					</COFINS>
+				</imposto>
+			</det>
+			<det nItem="2">
+				<prod>
+					<cProd>120424</cProd>
+					<cEAN>SEM GTIN</cEAN>
+					<xProd>Calca Jeans Masculina Skinny Destroyed Escura Dark (Azul, 42, Skinny)</xProd>
+					<NCM>62034200</NCM>
+					<CFOP>2202</CFOP>
+					<uCom>PC</uCom>
+					<qCom>1.0000</qCom>
+					<vUnCom>139.00</vUnCom>
+					<vProd>139.00</vProd>
+					<cEANTrib>SEM GTIN</cEANTrib>
+					<uTrib>PC</uTrib>
+					<qTrib>1.0000</qTrib>
+					<vUnTrib>139.00</vUnTrib>
+					<indTot>1</indTot>
+					<nItemPed>2</nItemPed>
+				</prod>
+				<imposto>
+					<vTotTrib>43.72</vTotTrib>
+					<ICMS>
+						<ICMSSN102>
+							<orig>0</orig>
+							<CSOSN>400</CSOSN>
+						</ICMSSN102>
+					</ICMS>
+					<PIS>
+						<PISOutr>
+							<CST>99</CST>
+							<vBC>0.00</vBC>
+							<pPIS>0.00</pPIS>
+							<vPIS>0.00</vPIS>
+						</PISOutr>
+					</PIS>
+					<COFINS>
+						<COFINSOutr>
+							<CST>99</CST>
+							<vBC>0.00</vBC>
+							<pCOFINS>0.00</pCOFINS>
+							<vCOFINS>0.00</vCOFINS>
+						</COFINSOutr>
+					</COFINS>
+				</imposto>
+			</det>
+			<total>
+				<ICMSTot>
+					<vBC>0.00</vBC>
+					<vICMS>0.00</vICMS>
+					<vICMSDeson>0.00</vICMSDeson>
+					<vFCP>0.00</vFCP>
+					<vBCST>0.00</vBCST>
+					<vST>0.00</vST>
+					<vFCPST>0.00</vFCPST>
+					<vFCPSTRet>0.00</vFCPSTRet>
+					<vProd>278.00</vProd>
+					<vFrete>0.00</vFrete>
+					<vSeg>0.00</vSeg>
+					<vDesc>0.00</vDesc>
+					<vII>0.00</vII>
+					<vIPI>0.00</vIPI>
+					<vIPIDevol>0.00</vIPIDevol>
+					<vPIS>0.00</vPIS>
+					<vCOFINS>0.00</vCOFINS>
+					<vOutro>0.00</vOutro>
+					<vNF>278.00</vNF>
+					<vTotTrib>87.44</vTotTrib>
+				</ICMSTot>
+			</total>
+			<transp>
+				<modFrete>0</modFrete>
+				<vol>
+					<esp>Volumes</esp>
+					<pesoL>0.000</pesoL>
+					<pesoB>0.000</pesoB>
+				</vol>
+			</transp>
+			<pag>
+				<detPag>
+					<tPag>90</tPag>
+					<vPag>0.00</vPag>
+				</detPag>
+			</pag>
+			<infAdic>
+				<infCpl>Total aproximado de tributos: R$ 87,44 (31,45%)  Federais R$ 37,40 (13,45%)  Estaduais R$ 50,04 (18,00%) . Fonte IBPT.&lt;br /&gt;</infCpl>
+			</infAdic>
+			<infRespTec>
+				<CNPJ>01056417000139</CNPJ>
+				<xContato>Organisys Software SA</xContato>
+				<email>fiscal@bling.com.br</email>
+				<fone>05430579470</fone>
+			</infRespTec>
+		</infNFe>
+		<Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+			<SignedInfo>
+				<CanonicalizationMethod Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+				<SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+				<Reference URI="#NFe35240229846739000109550010000000401875115201">
+					<Transforms>
+						<Transform Algorithm="http://www.w3.org/2000/09/xmldsig#enveloped-signature"/>
+						<Transform Algorithm="http://www.w3.org/TR/2001/REC-xml-c14n-20010315"/>
+					</Transforms>
+					<DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1"/>
+					<DigestValue>QRdDx1SvsgBWZp6LrogYnaIkAqk=</DigestValue>
+				</Reference>
+			</SignedInfo>
+			<SignatureValue>1sH90lD+yloytzixZg+yq5K3bvCrldkGn+2NggfwDGEmMWTjeyAJDovpna6f8YG/ex4cLegLDdtChjrlqiGs0s4u2D0gsNM04/aXeYL2V6XwZgkmmz4kXv7NVD7K+jJO2AlbQhcTI9s4BYW4SesoVfzNhhCZ8Ae7k8zOLPTOvg6FUlRyDjBYNK+Hh0B77B0NDAW5viVJjSlrJApT6xs527A4lwOF0Aezg5uTaUkFTtoQqV497u7ZIK3jDncAcOiDiAQ3hBVi++8++MH3ajJVBRtYv+NvrdC0UlSjN+3xSWysdsmmbkswUfEp1Vrwlq7vCO8HpgAzr3+bcDFBG0duDw==</SignatureValue>
+			<KeyInfo>
+				<X509Data>
+					<X509Certificate>MIIH/TCCBeWgAwIBAgIIcRCPnAWUFGEwDQYJKoZIhvcNAQELBQAwezELMAkGA1UEBhMCQlIxEzARBgNVBAoTCklDUC1CcmFzaWwxNjA0BgNVBAsTLVNlY3JldGFyaWEgZGEgUmVjZWl0YSBGZWRlcmFsIGRvIEJyYXNpbCAtIFJGQjEfMB0GA1UEAxMWQUMgQ09OU1VMVEkgQlJBU0lMIFJGQjAeFw0yMzAzMDMxNzI3MTJaFw0yNDAzMDMxNzI3MTJaMIHmMQswCQYDVQQGEwJCUjETMBEGA1UEChMKSUNQLUJyYXNpbDELMAkGA1UECBMCU1AxDjAMBgNVBAcTBUJBVVJVMRcwFQYDVQQLEw4xMjA3Mzc0MzAwMDE3MDE2MDQGA1UECxMtU2VjcmV0YXJpYSBkYSBSZWNlaXRhIEZlZGVyYWwgZG8gQnJhc2lsIC0gUkZCMRYwFAYDVQQLEw1SRkIgZS1DTlBKIEExMRMwEQYDVQQLEwpwcmVzZW5jaWFsMScwJQYDVQQDEx5GVUxWSU8gREUgTUFUT1M6Mjk4NDY3MzkwMDAxMDkwggEiMA0GCSqGSIb3DQEBAQUAA4IBDwAwggEKAoIBAQD83xVsOfscrhuSHGEEJrPdPxMSz6hpZfhU4Lfd4Yj164A55ZWLxW/XNt/0JlZP3509l38bZAvPdaP/tGdYZz+WxPVETRzPiWCty1nIsmm1v0QJ6Cbbcg8HdA1LGteakg8DtF9O81JWhqsJp3vax0DPvQKuxJXOSFRAp8jLgR+f2pIs0c4xbdRZaBuVkynY7XzfB3IKkNvAZbzIRQrwVQKZyHDLyHBmytBJAHEUX1taDYnIcao0vlVyrScNWNBiMS9cZvTeV1ryRE5HYcXpJc2mErcVUCF8cZ4dgJ+RSANFZ96W+hFKsTHv53bRklZ3QFOQz14wBtQWzu/oU5SlWy3HAgMBAAGjggMXMIIDEzAfBgNVHSMEGDAWgBSu8aFwdhNq++eUd5wyLFfLFDhZ3zAOBgNVHQ8BAf8EBAMCBeAwgYAGA1UdIAR5MHcwdQYGYEwBAgFBMGswaQYIKwYBBQUHAgEWXWh0dHA6Ly9yZXBvc2l0b3Jpby5hY2NvbnN1bHRpYnJhc2lsLmNvbS5ici9hYy1hY2NvbnN1bHRpYnJhc2lscmZiL2RwYy1hY2NvbnN1bHRpYnJhc2lscmZiLnBkZjCB4AYDVR0fBIHYMIHVMGigZqBkhmJodHRwOi8vcmVwb3NpdG9yaW8uYWNjb25zdWx0aWJyYXNpbC5jb20uYnIvYWMtYWNjb25zdWx0aWJyYXNpbHJmYi9sY3ItYWMtYWNjb25zdWx0aWJyYXNpbHJmYnY0LmNybDBpoGegZYZjaHR0cDovL3JlcG9zaXRvcmlvMi5hY2NvbnN1bHRpYnJhc2lsLmNvbS5ici9hYy1hY2NvbnN1bHRpYnJhc2lscmZiL2xjci1hYy1hY2NvbnN1bHRpYnJhc2lscmZidjQuY3JsMIGtBggrBgEFBQcBAQSBoDCBnTBqBggrBgEFBQcwAoZeaHR0cDovL3JlcG9zaXRvcmlvLmFjY29uc3VsdGlicmFzaWwuY29tLmJyL2FjLWFjY29uc3VsdGlicmFzaWxyZmIvYWMtYWNjb25zdWx0aWJyYXNpbHJmYnY0LnA3YjAvBggrBgEFBQcwAYYjaHR0cDovL29jc3AuYWNjb25zdWx0aWJyYXNpbC5jb20uYnIwgaoGA1UdEQSBojCBn4ETQlJVTk9AS0FaWk8yLkNPTS5CUqAaBgVgTAEDAqAREw9GVUxWSU8gREUgTUFUT1OgGQYFYEwBAwOgEBMOMjk4NDY3MzkwMDAxMDmgOAYFYEwBAwSgLxMtMjEwMzE5NzcyNzc5MDk2ODg4MjAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwMDAwoBcGBWBMAQMHoA4TDDAwMDAwMDAwMDAwMDAdBgNVHSUEFjAUBggrBgEFBQcDAgYIKwYBBQUHAwQwDQYJKoZIhvcNAQELBQADggIBAHV9xzohzrtCWecxapWLsqBOx3bkk2pp/zq7Hmn83QBHFkbWOF9n8u+aS9mo5mgVxbOQtJUscNPEb9lOlHhw0S/4rmdH7CIcOO04oBFbK76gcr1keqQYgDd1Twe1mIcHNBDOm0w9uNHYnz3bD9AgpaXr7zwOG5JrAkQWmimHxrsb/izDWS87NKuZoCv8LGwSIuz6waBWnPuzQYhzEGCliBnwJFgPG59z8Ylg5RJwVgg30fixWV8JWoVDGbpJ+pQVleFHbHr93UU/u9+1UhvWJAohvKHM/8K/cm3yCr2vMg/Y4jNRkoH1aoqobyIy6wCNMZFlSQdG+kCh6xNjEyhW/a2rwfjyFd5wpyEc672Z98mgDE4flFBrN6PalYFfqX//G7dyUMGQUVQuqzJ4CYCdu1tBaaDpbn+HjGdAWvmz5h+3bDX/+lJWkUwxUB8u7yx/sMqT3RlIjtp8rkuktdo3gXNqop8pTxUd+x0pQIV3512K4IKhmRaYRV0S2zTm3VCmohS7Cyv+zM0Dn5EUYr/XGLBLLZ9pcKhT00iRxrB7mBWHed5WuMtcvytZehBDJOvDnaayj8d6MX+nOgW/Q1yqOZn9ioYdFkmbWgucC9yQnplnBhgKVe34fewhAaFVS++l4qH2l0ERiuIQvurGytJzBg4IHpH2JjiQUEHfZKQuqncT</X509Certificate>
+				</X509Data>
+			</KeyInfo>
+		</Signature>
+	</NFe>
+	<protNFe versao="4.00">
+		<infProt>
+			<tpAmb>1</tpAmb>
+			<verAplic>SP_NFE_PL009_V4</verAplic>
+			<chNFe>35240229846739000109550010000000401875115201</chNFe>
+			<dhRecbto>2024-02-08T08:57:07-03:00</dhRecbto>
+			<nProt>135240286521666</nProt>
+			<digVal>QRdDx1SvsgBWZp6LrogYnaIkAqk=</digVal>
+			<cStat>100</cStat>
+			<xMotivo>Autorizado o uso da NF-e</xMotivo>
+		</infProt>
+	</protNFe>
+</nfeProc>

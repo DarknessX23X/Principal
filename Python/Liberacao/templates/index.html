@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Liberação TOTVS</title>
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}" />
+    <script src ="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+
+
+    .container-centralizado {
+    display: flex;
+    justify-content: center;
+    
+    border: 1px solid rgb(69,97,253);
+    background-color: white;
+    width: 300px;
+    height: 400px;
+    position: fixed;
+    top: 40%;
+    left: 30%;
+    transform: translate(-50%, -50%);
+}
+
+.container-resultado {
+    display: flex;
+    justify-content: center;
+    border: 1px solid rgb(69,97,253);
+    background-color: white;
+    width: 700px;
+    height: 400px;
+    position: fixed;
+    top: 199px;
+    left: 650px;
+    transform: translate(-50%, -50%);
+}
+
+
+.custom-label {
+      color:rgb(163,122,253);
+      font-family: 'ColesHapticExBd';
+      font-size:250%
+    }
+
+@font-face {
+    font-family: 'ColesHapticExBd';
+    src: url('../static/ColesHapticExBd.ttf') format('truetype');
+    
+    /* ajuste o caminho e o formato do arquivo de fonte conforme necessário */
+            }
+
+.container-centralizado img {
+width: 20%;
+
+}
+body {
+      margin: 0;
+      padding: 0;      
+      background-image: url("../static/img/wallpaper.png");
+      background-size: auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      /* use o nome da fonte definido no @font-face */
+    }   
+
+
+input{
+    text-transform: uppercase;
+
+}
+
+    </style>
+</head>
+<body>
+    <div class="container-centralizado">
+        <div class="row">
+            <div class="col s20 center">
+                <form action="pesquisar"  method="POST" >    
+                <br>                
+                <center><img src="{{ url_for('static', filename='img/icone.png') }}" alt="Icone XML"></center>
+                <span class="card-title center custom-label"><strong>TOTVS</strong></span> 
+                <br><br>
+                <div class="input-field">               
+                    
+                    <select name="opcoes" id="opcoes">
+                        <option value="Grupos">Grupos</option>
+                        <option value="Telas">Telas</option>
+                        <option value="Usuarios">Usuarios</option>
+                    </select>
+                    <label>Opções</label>
+                    <input name="pesquisa" id="pesquisa"></input>
+                    <br>
+                      
+                    <button class="btn waves-effect waves-light" type="submit" name="acao">Consultar
+                        <i class="material-icons right">search</i></button>
+                    </form>
+                    <br><br>
+                    <form action="atualizar_tabelas"  method="POST" > 
+                        <button class="btn waves-effect waves-light" type="submit" name="atualizar">Atualizar Tabelas
+                            <i class="material-icons right">dashboard</i></button>
+                        </form>  
+
+            </div>
+        </div>
+    </div>
+
+    <div class="container-resultado" style="overflow:auto;">
+        <div class="row">
+            <div class="col s20">
+                <table class="highlight striped">
+                    <thead>
+                        <tr>
+                            {% for column_name in column_names %}
+                            <th>{{ column_name }}</th>
+                            {% endfor %}
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in table_data %}
+                        <tr>
+                            {% for cell in row %}
+                            <td>{{ cell }}</td>
+                            {% endfor %}
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    
+
+    <script>    
+        document.addEventListener('DOMContentLoaded', function() {
+            var elems = document.querySelectorAll('select');
+            var instances = M.FormSelect.init(elems);      
+        });
+
+        if (!"{{ alert_message }}")
+        {
+            
+        }
+        else{
+            alert("{{ alert_message }}");
+        }
+
+    </script>
+</body>
+</html>

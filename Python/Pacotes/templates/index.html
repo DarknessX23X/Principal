@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1.0"/>
+  <title>TOTVS - XML (Importação)</title>
+  <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/materialize.min.css') }}" />
+  <script src ="{{ url_for('static', filename='js/materialize.min.js') }}"></script>
+  <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <style>
+    .center-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin-top: -50px; /* Ajuste de margem para alinhar verticalmente */
+      font-weight: bold;
+    }
+
+    .custom-btn {
+      background-color: white; /* altere a cor de fundo */
+      color:rgb(35, 16, 75); /* altere a cor do texto */
+      position: center;      
+    }    
+
+    .custom-container {
+      border: 5px solid purple;
+      padding: 10px; /* Opcional para adicionar espaço interno */
+      background-color: rgb(0, 95, 150);
+    }
+
+    .custom-label {
+      color:white;
+      font-family: 'ColesHapticExBd';
+    }
+    .image-container {
+      display: inline-block;
+      margin-right: 10px;
+      vertical-align: middle;
+      color: white;
+      position: center;
+      /* Adicionado para posicionar a imagem à esquerda */
+    }
+    
+    .image-container img {
+      width: 20%;     
+    }
+
+    
+
+    .import-text {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }  
+        
+    @font-face {
+      font-family: 'ColesHapticExBd';
+      src: url('../static/ColesHapticExBd.ttf') format('truetype');
+      /* ajuste o caminho e o formato do arquivo de fonte conforme necessário */
+    }
+
+    body {
+      margin: 0;
+      padding: 0;      
+      background-image: url("https://images2.alphacoders.com/122/1224122.png");
+      background-size: auto;
+      background-position: center;
+      background-repeat: no-repeat;
+      height: 100vh;
+      /* use o nome da fonte definido no @font-face */
+    }    
+
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+  </style>
+</head>
+<body>
+    <div class="center-container">
+        <div class="container">
+            <div class="row">
+                <div class="col s12 m6 offset-m3">
+                    <div class="card">
+                        <div class="card-content custom-container"> 
+                            <div class="image-container">
+                                <center><img src="{{ url_for('static', filename='img/icone.png') }}" alt="Icone XML"></center>
+                                <span class="card-title center custom-label"><strong>XML TOTVS</strong></span>
+                                <center><form action="/import_xml" method="POST" enctype="multipart/form-data">
+                                    
+                                    <div class="file-field input-field">
+                                        <div class="btn right custom-btn">
+                                          <i class="material-icons right">file_upload</i>
+                                          <span>Arquivos</span>
+                                          <input type="file" multiple name="xml_file" accept=".xml" value="xml" id="xml_file">
+                                        </div>
+                                        <div class="file-path-wrapper">
+                                          <input class="file-path validate" type="text">
+                                        </div>
+                                      </div>                               
+                                      <select name="opcoes" id="opcoes" class="browser-default"></select>
+                                <button class="btn waves-effect waves-light custom-btn import-text" type="submit" name="acao">Importar
+                                <i class="material-icons right">send</i>
+                                </button>
+                                </form>
+    </div>
+            </div>
+                </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            <script>
+                var select = document.getElementById('opcoes');
+                var hiddenInputArray = document.getElementsByName('opcao_selecionada');
+                var fileInput = document.getElementById('xml_file');
+             
+              
+                select.addEventListener('change', function() {
+                  hiddenInputArray.forEach(function(hiddenInput) {
+                    hiddenInput.value = select.value;
+                  });
+                });
+        
+                document.addEventListener('DOMContentLoaded', function() {
+              fetch('/operacoes.txt')
+                .then(response => response.text())
+                .then(opcoes => {
+                  const select = document.getElementById('opcoes');
+                  const options = opcoes.split('\n');
+                  options.forEach(option => {
+                    const el = document.createElement('option');
+                    el.textContent = option;
+                    el.value = option;
+                    select.appendChild(el);
+                  });
+        
+                  // Inicializar o combobox Materialize
+                  var elems = document.querySelectorAll('select');
+                  var instances = M.FormSelect.init(elems, {});
+                  var meuInput = document.getElementById('opcao_selecionada');
+                    meuInput.value = select.value;
+                })
+                .catch(error => {
+                  console.error('Erro ao carregar opções:', error);
+                });
+            });
+           
+        
+          fileInput.addEventListener('change', function() {
+            var fileName = fileInput.files[0].name;
+            
+            hiddenInputArray.forEach(function(hiddenInput) {
+              hiddenInput.value = fileName;
+            });
+          });
+        
+        
+              </script>
+</body>
+</html>

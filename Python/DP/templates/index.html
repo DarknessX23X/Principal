@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='img/favicon.ico') }}">
+    <title>Coleta de Marcações</title>
+</head>
+<body>
+    
+    
+
+    <form method="POST">
+        <img src="../static/img/logo.jpg">
+        <h1>Dados:</h1>
+        <label for="data">Data Inicial:</label>
+        <input type="date" id="datai" name="datai" required>
+        <br>
+        <label for="data">Data Final:</label>
+        <input type="date" id="dataf" name="dataf" required>
+        <br>
+        <button type="submit">Gerar</button>
+        
+    </form>    
+    
+</body>
+
+<script>
+    const form = document.querySelector('form');
+
+    form.addEventListener('submit', (event) => {
+        // Exibe o alert
+        alert('Arquivo gerado com sucesso!');
+    });
+</script>
+</html>
