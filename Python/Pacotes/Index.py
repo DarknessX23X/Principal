@@ -231,7 +231,10 @@ def import_xml():
 
         try:
             vencimento =  vencimento_tags[0].firstChild.nodeValue
-            documento ="01" 
+            if parte_texto == "523" :
+                documento ="20" 
+            else:
+                documento ="01"
         except:
             vencimento = date.today()
             vencimento = vencimento.strftime("%d/%m/%Y") 

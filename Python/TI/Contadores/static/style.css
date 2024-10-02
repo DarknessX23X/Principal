@@ -1,0 +1,106 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  background-image: url("https://images2.alphacoders.com/122/1224122.png");
+  background-size: auto;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: #ffffff;
+}
+
+table {
+  width: 80%;
+  margin: 20px auto;
+  border-collapse: collapse;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.printer-icon {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+.printer-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.printer-icon:hover {
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.printer-info {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.printer-info h2 {
+  color: #333;
+}
+
+.printer-info p {
+  color: #555;
+}
+#export-button {
+    background-color: #4CAF50; /* Verde */
+    border: none;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px 0;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Transição suave para o hover */
+  }
+  
+  #export-button:hover {
+    background-color: #3e8e41; /* Verde mais escuro */
+  }
+  
+  #export-button::before {
+    content: "";
+    display: inline-block;
+    vertical-align: middle;
+    width: 20px;
+    height: 20px;
+    background-image: url("https://e7.pngegg.com/pngimages/820/303/png-clipart-excel-logo-microsoft-excel-microsoft-office-macro-application-software-icon-excel-text-logo.png"); /* Substitua pela URL do seu ícone */
+    background-repeat: no-repeat;
+    background-size: contain;
+    margin-right: 5px;
+  }

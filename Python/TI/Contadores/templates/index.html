@@ -1,43 +1,63 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='estilo.css') }}">
-    <title>Contadores de Impressora</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Impressoras Brother</title>
 </head>
 <body>
-    <center><h1>Contadores de Impressora</h1></center>
-    <table border="1">
-        <thead>
-            <tr>
-                <th>Impressora</th>
-                <th>Tipo</th>
-                <th>{{ mes_anterior }}</th>                
-                <th>{{ mes_atual }}</th>
-                <th>Total</th>
-                <th>Preço por Pagina</th>
-                <th>Valor</th>
-                <th>Mensalidade</th>
+  <h1>Contadores de Impressoras Brother</h1>
+  <table>
+    <thead>
+      <tr>
+        <th>LOCAL</th>
+        <th>Contador de Páginas</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for printer in printer_data %}
+        <tr>
+          <td>{{ printer.ip }}</td>
+          <td>{{ printer.contador }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <center><button id="export-button">Exportar para Excel</button></center>
+  <script>
+    document.getElementById('export-button').addEventListener('click', function() {
+      // Função para exportar a tabela para Excel
+      exportTableToExcel('table', 'impressoras');
+    });
 
-            </tr>
-        </thead>
-        <tbody>
-            {% for row in dados %}                       
-            <tr>
-                
-                <td><a href="{{ row[0] }}">{{ row[1] }}</a></td>                 
-                <td>{{ row[2] }}</td>
-                <td>{{ row[5] }}</td>
-                <td>Teste2</td>
-                <td>Teste3</td>
-                <td>R$ {{row[3]}}</td>
-                <td>Teste5</td>
-                <td>R$ {{row[4]}}</td>                          
-            </tr>                
-                {% endfor %}                  
-        </tbody>
-    </table>
+    function exportTableToExcel(tableID, filename = '') {
+      var downloadLink;
+      var dataType = 'application/vnd.ms-excel';
+      var tableSelect = document.getElementById(tableID);
+      var tableHTML = tableSelect.outerHTML.replace(/ /g, '%20');
+
+      // Especifica o tipo de arquivo do download
+      filename = filename ? filename + '.xls' : 'my_data.xls';
+
+      // Cria o link de download
+      downloadLink = document.createElement("a");
+
+      document.body.appendChild(downloadLink);
+
+      if (navigator.msSaveOrOpenBlob) {
+        var blob = new Blob(['\ufeff', tableHTML], { type: dataType });
+        navigator.msSaveOrOpenBlob(blob, filename);
+      } else {
+        // Cria um link para download
+        downloadLink.href = 'data:' + dataType + ', ' + tableHTML;
+        downloadLink.download = filename;
+
+        // Simula um clique no link
+        downloadLink.click();
+      }
+    }
+  </script>
+  
 </body>
 </html>
