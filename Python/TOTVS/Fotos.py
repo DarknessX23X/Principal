@@ -18,13 +18,13 @@ caminho_arquivo = 'C:\\config\\1.jpg'
 conn = pyodbc.connect(conn_str)
 cursor = conn.cursor()
 
-cursor.execute('select a.ID,a.imagem,b.NOME from GIMAGEM a,PPESSOA b where b.IDIMAGEM=a.ID')
+cursor.execute('select a.ID,a.imagem,b.NOME,c.CHAPA from GIMAGEM a,PPESSOA b,pfunc c where b.IDIMAGEM=a.ID and c.NOME=b.NOME')
 resultados = cursor.fetchall()
 
 #imagem_bytes = cursor.fetchone()[0]
 
 for row in resultados:
-    caminho_arquivo = 'C:\\config\\Fotos\\'f'{row[2]}.jpg'
+    caminho_arquivo = 'C:\\config\\Fotos\\'f'{row[3]}.jpg'
     print(caminho_arquivo)
     with open(caminho_arquivo, "wb") as arquivo:
         arquivo.write(row[1])   
