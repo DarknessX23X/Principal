@@ -23,7 +23,7 @@ options = webdriver.ChromeOptions()
 options.add_argument('--ignore-certificate-errors')
 options.add_argument('--ignore-ssl-errors')
 #options.add_argument('--start-maximized')
-#options.add_argument('--headless')
+options.add_argument('--headless')
 driver = webdriver.Chrome(options)
 
 # Abre o Chrome
@@ -108,7 +108,7 @@ for i in range(len(primeiros_itens)):
 
 
 
-workbook.save("X:\\TI\\Giovane\\ramais_final.xlsx")
+workbook.save("X:\\TI\\TI - Ramais .xlsx")
 
 #print(numerosa)
 #print(primeiros_itens)
