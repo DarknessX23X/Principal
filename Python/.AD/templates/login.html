@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="POST">
+        <label for="username">Nome de usuário:</label>
+        <select name="username" id="username">
+            {% for user in users %}
+                <option value="{{ user }}">{{ user }}</option>
+            {% endfor %}
+        </select>
+        <label for="password">Senha:</label>
+        <input type="password" name="password" id="password">
+        <button type="submit">Entrar</button>
+    </form>
+</body>
+</html>

@@ -231,14 +231,14 @@ def import_xml():
 
         try:
             vencimento =  vencimento_tags[0].firstChild.nodeValue
-            if parte_texto == "523" :
+            if parte_texto == "523" or parte_texto == "3208" :
                 documento ="20" 
             else:
                 documento ="01"
         except:
             vencimento = date.today()
             vencimento = vencimento.strftime("%d/%m/%Y") 
-            if parte_texto == "523" :
+            if parte_texto == "523" or parte_texto == "3208" :
                 documento ="20" 
             else:
                 documento ="01" 
@@ -280,7 +280,8 @@ def import_xml():
         else: 
             resultado = envia_pacote(urlpct, data, token)
         if resultado:
-            print(resultado["nrPacote"])
+            print(resultado)
+            #print(resultado["nrPacote"])
         else:
             print("Falha na consulta da API")
 
