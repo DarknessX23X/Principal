@@ -3,8 +3,10 @@ import os
 import subprocess
 import csv
 import datetime
+from openpyxl import load_workbook, formatting
 #Peso
-peso = 0.400       
+peso = 0.400    
+transporte = 0.200   
 
 # Obtém o caminho do diretório atual
 current_directory = os.getcwd()
@@ -47,6 +49,10 @@ font4 = openpyxl.styles.Font(name='Arial',bold=True, size=11)
 font5 = openpyxl.styles.Font(name='Arial',bold=True, italic=True, size=12)
 font6 = openpyxl.styles.Font(name='Arial',bold=True, size=10)
 font7 = openpyxl.styles.Font(name='Arial',bold=True,  size=16)
+font8 = openpyxl.styles.Font(name='Arial',bold=True,  size=10,color='FF0000')
+font9 = openpyxl.styles.Font(name='Arial',bold=True, size=12)
+font10 = openpyxl.styles.Font(name='Arial',bold=True, italic=True, size=12)
+
 
 #Define o alinhamento e aplica as fontes
 sheet['B1'].alignment = openpyxl.styles.Alignment(horizontal='center')
@@ -154,9 +160,19 @@ sheet.sheet_view.showGridLines = False
 
 csv_file_path = 'X:\\TI\\Giovane\\Amostra\\CUSTO.CSV'  # Substitua 'arquivo.csv' pelo nome do seu arquivo CSV
 with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
+    class VariavelGlobal:
+        def __init__(self, valor_inicial):
+            self.valor = valor_inicial
+
+        def get_valor(self):
+            return self.valor
+
+        def set_valor(self, novo_valor):
+            self.valor = novo_valor    
+    subtotal = VariavelGlobal(0)        
     reader = csv.reader(csvfile, delimiter=';')
-    next(reader)  # Pula a primeira linha (cabeçalho)
-    subtotal = 0
+    next(reader) 
+    total = 0
     row_num2 = 7
     for row in reader:
         if any(cell.strip() for cell in row):
@@ -172,12 +188,17 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
                 sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12)
                 sheet.cell(row=row_num2, column=2).alignment =openpyxl.styles.Alignment(horizontal='center') 
                 sheet.cell(row=row_num2, column=3).value = int(Sku)
+                sheet.cell(row=row_num2, column=2).font = font6
+                sheet.cell(row=row_num2, column=3).font = font6
+                sheet.cell(row=row_num2, column=17).font = font6
                 sheet.cell(row=row_num2, column=3).alignment =openpyxl.styles.Alignment(horizontal='center')
                 sheet.cell(row=row_num2, column=5).value = DescricaoPRD 
                 sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='center')    
                 sheet.cell(row=row_num2, column=17).value = peso * float(Valor.replace(',', '.')) * (float(Qtde.replace(',', '.'))) 
                 sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='center')
-                subtotal = subtotal + (peso * float(Valor.replace(',', '.')) * (float(Qtde.replace(',', '.')))) 
+                total = total + (peso * float(Valor.replace(',', '.')) * (float(Qtde.replace(',', '.')))) 
+                subtotal.set_valor(total)              
+
                 sheet.cell(row=row_num2, column=2).border = all_thin
                 sheet.cell(row=row_num2, column=3).border = all_thin            
                 sheet.cell(row=row_num2, column=17).border = all_thin
@@ -201,14 +222,27 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
         sheet.cell(row=row_num2, column=col).border = all_thin
     row_num2 += 1
 with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
+    class VariavelGlobal1:
+        def __init__(self, valor_inicial):
+            self.valor = valor_inicial
+
+        def get_valor(self):
+            return self.valor
+
+        def set_valor(self, novo_valor):
+            self.valor = novo_valor    
+    subtotal2 = VariavelGlobal1(0)  
+    total2 = 0     
     reader = csv.reader(csvfile, delimiter=';')
-    next(reader)  # Pula a primeira linha (cabeçalho)
-    subtotal = 0
-    #row_num2 = 21
+    next(reader)
     for row in reader:
         if any(cell.strip() for cell in row):
             if row[0] == "SV": 
                 sheet.cell(row=row_num2, column=3).value = int(row[4]) 
+                sheet.cell(row=row_num2, column=17).value = float(row[6].replace(',', '.'))
+                total2 = total2 + float(row[6].replace(',', '.'))
+                subtotal2.set_valor(total2) 
+                sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='center')
                 sheet.cell(row=row_num2, column=3).alignment =openpyxl.styles.Alignment(horizontal='center')
                 sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12)
                 sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='center') 
@@ -237,9 +271,12 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
     for col in range(2,18):
         sheet.cell(row=row_num2, column=col).border = all_thin 
         sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
-        sheet.cell(row=row_num2, column=5).value = "CUSTO PRODUTOS + 20%"
-        sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center') 
+        sheet.cell(row=row_num2, column=5).value = "CUSTO PRODUTOS + 20%"  
+        sheet.cell(row=row_num2, column=17).value = 'R$ ' +  str(round(subtotal.get_valor() *1.2,4)).replace('.', ',')
+        sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+        sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')  
         sheet.cell(row=row_num2, column=5).font = font6 
+        sheet.cell(row=row_num2, column=17).font = font6
     row_num2 += 1
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=2,end_column=3)
@@ -250,20 +287,26 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
         sheet.cell(row=row_num2, column=col).border = all_thin 
         sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
         sheet.cell(row=row_num2, column=5).value = "CUSTO MANUAIS/LAVAGEM"
+        sheet.cell(row=row_num2, column=17).value = 'R$ ' +  str(round(subtotal2.get_valor(),4)).replace('.', ',')
         sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center') 
+        sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center') 
         sheet.cell(row=row_num2, column=5).font = font6
+        sheet.cell(row=row_num2, column=17).font = font6
     row_num2 += 1
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=2,end_column=3)
-    sheet.cell(row=row_num2, column=2).value = " "
-    sheet.cell(row=row_num2, column=2).font = font6
+    sheet.cell(row=row_num2, column=2).value = "GIOVANE"
+    sheet.cell(row=row_num2, column=2).font = font10
     sheet.cell(row=row_num2, column=2).alignment =openpyxl.styles.Alignment(horizontal='center',vertical='center')
     for col in range(2,18):
         sheet.cell(row=row_num2, column=col).border = all_thin 
         sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
         sheet.cell(row=row_num2, column=5).value = "CUSTO SUB-TOTAL >>>"
-        sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center') 
+        sheet.cell(row=row_num2, column=17).value = 'R$ ' +  str(round((subtotal.get_valor()*1.2) + subtotal2.get_valor(),4)).replace('.', ',')
+        sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+        sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')  
         sheet.cell(row=row_num2, column=5).font = font6
+        sheet.cell(row=row_num2, column=17).font = font6
     row_num2 += 1
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2+4,start_column=2,end_column=3)
@@ -275,7 +318,10 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
             sheet.cell(row=row1, column=col).border = all                
             sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
             sheet.cell(row=row_num2, column=5).value = "TRANSPORTE"
-            sheet.cell(row=row_num2, column=5).font = font6
+            sheet.cell(row=row_num2, column=17).value = "SIM"
+            sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+            sheet.cell(row=row_num2, column=5).font = font6   
+            sheet.cell(row=row_num2, column=17).font = font8        
             sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
         for col in range(2,18):
             sheet.cell(row=row1, column=col).border = all  
@@ -283,46 +329,48 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
     sheet.cell(row=row_num2, column=5).value = "COMISSÃO"
+    sheet.cell(row=row_num2, column=17).value = "NÃO"
     sheet.cell(row=row_num2, column=5).font = font6
+    sheet.cell(row=row_num2, column=17).font = font8  
     sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+    sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
     for col in range(2,18):
         sheet.cell(row=row1, column=col).border = all  
     row_num2 += 1
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
     sheet.cell(row=row_num2, column=5).value = "TAMANHO DAS PEÇAS"
+    sheet.cell(row=row_num2, column=17).value = "Pças Médias"
     sheet.cell(row=row_num2, column=5).font = font6
+    sheet.cell(row=row_num2, column=17).font = font6
     sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+    sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+    
     for col in range(2,18):
         sheet.cell(row=row1, column=col).border = all  
     row_num2 += 1
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
     sheet.cell(row=row_num2, column=5).value = "PREÇO SUGERIDO PARA TERCEIROS (TOTAL + 20%)"
+    sheet.cell(row=row_num2, column=17).value = 'R$ ' +  str(round((((subtotal.get_valor()*1.2) + subtotal2.get_valor() + transporte)*1.2),4)).replace('.', ',')
     sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
+    sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')
     sheet.cell(row=row_num2, column=5).font = font6
+    sheet.cell(row=row_num2, column=17).font = font9
     for col in range(2,18):
         sheet.cell(row=row1, column=col).border = all   
     row_num2 += 1
     sheet.row_dimensions[row_num2].height = 24
     sheet.merge_cells(start_row=row_num2,end_row=row_num2,start_column=5,end_column=12) 
     sheet.cell(row=row_num2, column=5).value = "CUSTO TOTAL >>>"
+    sheet.cell(row=row_num2, column=17).value = 'R$ ' +  str(round((subtotal.get_valor()*1.2) + subtotal2.get_valor() + transporte,4)).replace('.', ',')
     sheet.cell(row=row_num2, column=5).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center')  
-    sheet.cell(row=row_num2, column=5).font = font6              
+    sheet.cell(row=row_num2, column=17).alignment =openpyxl.styles.Alignment(horizontal='right',vertical='center') 
+    sheet.cell(row=row_num2, column=5).font = font7   
+    sheet.cell(row=row_num2, column=17).font = font9           
     for col in range(2,18):
         sheet.cell(row=row1, column=col).border = all
-    
-    
 
-            
-                                   
-  
-
-
-                
-                
-
-
-
-workbook.save(os.path.join(current_directory, 'Custo.xlsx'))
+workbook.save('E:\\Git\\Principal\\Python\\.Amostra\\Custo.xlsx')
+os.startfile('E:\\Git\\Principal\\Python\\.Amostra\\Custo.xlsx')
 print('Arquivo Excel criado com sucesso!')
