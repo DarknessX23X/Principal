@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Receita / Custo (AMOSTRA)</title>
+  <style>
+    body {
+      background-image: url("https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/820d8548-b71e-4ad2-abb4-a1de0a066929/dgkfi71-72105ea1-5ef1-4958-97f2-f81ac8d39513.png/v1/fill/w_1190,h_672,q_70,strp/arch_linux_blue_and_green_wallpaper_by_moonditto_d_by_solecrush_dgkfi71-pre.jpg?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9NzIzIiwicGF0aCI6IlwvZlwvODIwZDg1NDgtYjcxZS00YWQyLWFiYjQtYTFkZTBhMDY2OTI5XC9kZ2tmaTcxLTcyMTA1ZWExLTVlZjEtNDk1OC05N2YyLWY4MWFjOGQzOTUxMy5wbmciLCJ3aWR0aCI6Ijw9MTI4MCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.grhpNS1gjNyfo8ySFujXsUNFlRzEm4j1PHCsAHJhXlU"); /* Substitua pela URL da sua imagem de fundo */
+      background-size: cover;
+      font-family: Arial, sans-serif;
+      color: #333; /* Cor do texto */
+      text-align: left;
+      display: flex;
+      flex-direction: column;
+      align-items: left;
+      justify-content: left;      
+    }
+
+    h1, h2 {
+      margin-bottom: 10px;
+      color : black;
+      font-size:20px;
+    }
+
+    select {
+      width: auto;
+      padding: 10px;
+      border: 1px solid #ccc; /* Cor da borda */
+      background-color: #fff; /* Cor de fundo */
+      color: #333; /* Cor do texto */
+      font-size: 15px;
+      text-align-last:center;
+      border-radius: 5px; /* Arredonda as bordas */
+    }
+
+    button {
+      background-color: blue; /* Cor de fundo do botão */
+      border: none;
+      color: white; /* Cor do texto do botão */      
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 14px;
+      padding : 10px;
+      cursor: pointer;
+      border-radius: 5px; /* Arredonda as bordas */
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: auto; 
+      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+      border-radius: 5px;
+    }
+
+    label {
+      margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="number"],
+    input[type="email"],
+    textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    input[type="submit"] {
+      background-color: #4CAF50; /* Cor de fundo do botão */
+      border: none;
+      color: white; /* Cor do texto do botão */
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px; /* Arredonda as bordas */
+    }
+    /* Estilos para o formulário de informações adicionais */
+    #form-informacoes {
+      display: flex;
+      flex-direction: column;
+      width: auto; /* Largura do formulário */
+      
+      /*margin: 20px auto; /* Centraliza o formulário */
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: rgba(255, 255, 255, 0.8); /* Fundo branco semi-transparente */
+      border-radius: 5px;
+    }
+
+    #form-informacoes label {
+      margin-bottom: 5px;
+      text-align :center;
+    }
+
+    #form-informacoes input[type="text"],
+    #form-informacoes input[type="number"],
+    #form-informacoes input[type="email"],
+    #form-informacoes textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+
+    #form-informacoes input[type="submit"] {
+      background-color: #4CAF50; /* Cor de fundo do botão */
+      border: none;
+      color: white; /* Cor do texto do botão */
+      padding: 10px 20px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      font-size: 16px;
+      margin: 4px 2px;
+      cursor: pointer;
+      border-radius: 5px; /* Arredonda as bordas */
+    }
+
+    .container {
+        display: flex;
+        margin-bottom: 20px;
+        align-items: flex-start; 
+        gap: 5px; 
+    }
+     /* Estilos para a data e cliente */
+     #form-informacoes .input-group {
+      display: flex;
+      align-items: center;
+      gap: 5px; 
+      text-align: justify;
+      
+    }
+
+    #form-informacoes .input-group label {
+      margin-bottom: 0; /* Remove a margem inferior do label */
+
+    }
+
+    #form-informacoes .input-group input[type="text"] {
+        text-align: right;
+
+    }
+
+  </style>
+</head>
+<body>
+  <div class="container">    
+    <form method="POST">
+        <h2>CUSTO:</h2>
+      <select name="arquivo">
+        {% for arquivo in arquivos %}
+          <option value="{{ arquivo }}">{{ arquivo }}</option>
+        {% endfor %}
+      </select>
+      <button type="submit">Gerar</button>
+    </form>
+    <form id="form-informacoes" method="POST">
+        <center><h2>&nbsp;&nbsp;FORMULARIO DE RECEITA:</h2></center>
+            <div class="input-group">
+            <label for="nome">Cliente:</label>
+            <input type="text" id="nome" name="nome" required>
+            <label for="data">Data:</label>
+            <input type="text" id="data" name="data" value="" required>   
+            <label for="peso_unitario">Peso Unitario:</label>
+            <input type="text" id="peso_unitario" name="peso_unitario" required>     
+            </div>
+            <div class="input-group">
+            <label for="lavagem">Lavagem:</label>
+            <input type="text" id="lavagem" name="lavagem" required>
+            <label for="spa">SPA:</label>
+            <input type="text" id="spa" name="spa" required>
+        </div>
+        </form> 
+        <script>
+            // Get the date input element
+            const dateInput = document.getElementById('data');
+          
+            // Get today's date
+            const today = new Date();
+            const year = today.getFullYear();
+            const month = ('0' + (today.getMonth() + 1)).slice(-2); // Add leading zero if needed
+            const day = ('0' + today.getDate()).slice(-2); // Add leading zero if needed
+          
+            // Format the date as YYYY-MM-DD
+            const formattedDate = day + '/' + month + '/' + year;
+          
+            // Set the formatted date as the value of the date input
+            dateInput.value = formattedDate;
+          </script> 
+      </div>
+</body>
+</html>

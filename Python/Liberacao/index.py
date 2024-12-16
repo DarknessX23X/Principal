@@ -105,7 +105,7 @@ def atualizar_tabelas():
     sql ="DELETE FROM PERMISSOES"
     cursor.execute(sql)
     connection.commit()
-    sql ="SET GLOBAL max_allowed_packet = 500 * 1024 * 1024"
+    sql ="SET GLOBAL max_allowed_packet = 1024 * 1024 * 1024"
     cursor.execute(sql)
     sql = "INSERT INTO permissoes (codigo, nome, componente,ds_componente,cd_grupo,ds_grupo) VALUES (%s, %s, %s,%s, %s, %s)"    
     cursor.executemany(sql, data)

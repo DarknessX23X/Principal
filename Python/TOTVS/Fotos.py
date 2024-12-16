@@ -24,7 +24,7 @@ resultados = cursor.fetchall()
 #imagem_bytes = cursor.fetchone()[0]
 
 for row in resultados:
-    caminho_arquivo = 'C:\\config\\Fotos\\'f'{row[3]}.jpg'
+    caminho_arquivo = 'C:\\config\\Fotos\\'f'{row[2]}.jpg'
     print(caminho_arquivo)
     with open(caminho_arquivo, "wb") as arquivo:
         arquivo.write(row[1])   

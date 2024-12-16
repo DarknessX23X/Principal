@@ -373,4 +373,4 @@ with open(csv_file_path, 'r', encoding='utf-8') as csvfile:
 
 workbook.save('E:\\Git\\Principal\\Python\\.Amostra\\Custo.xlsx')
 os.startfile('E:\\Git\\Principal\\Python\\.Amostra\\Custo.xlsx')
-print('Arquivo Excel criado com sucesso!')
+print('Arquivo Excel criado com sucesso!',end ='\r')

@@ -37,6 +37,10 @@
     transform: translate(-50%, -50%);
 }
 
+select{
+    text-align-last: center;
+}
+
 
 .custom-label {
       color:rgb(163,122,253);
@@ -83,12 +87,11 @@ input{
                 <center><img src="{{ url_for('static', filename='img/icone.png') }}" alt="Icone XML"></center>
                 <span class="card-title center custom-label"><strong>TOTVS</strong></span> 
                 <br><br>
-                <div class="input-field">               
-                    
-                    <select name="opcoes" id="opcoes" >
-                        <option value="Grupos">Grupos</option>
-                        <option value="Telas" selected>Telas</option>
-                        <option value="Usuarios">Usuarios</option>
+                <div class="input-field">
+                    <select name="opcoes" id="opcoes" style="text-align-last:center;" >
+                        <option value="Grupos" style="text-align: center;">Grupos</option>
+                        <option value="Telas" selected style="text-align: center;">Telas</option>
+                        <option value="Usuarios" style="text-align: center;">Usuarios</option>
                     </select>
                     <label>Opções</label>
                     <input name="pesquisa" id="pesquisa"></input>
