@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Divs Side-by-Side</title>
+<style>
+body {
+  font-family: sans-serif;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around; /* Distribute space evenly */
+  align-items: center; /* Vertically center items */
+  border: 1px solid #ccc; /* Add a border for visual clarity */
+  padding: 20px;
+  height: 200px; /* Set a height for demonstration */
+}
+
+.div1, .div2 {
+  width: 45%; /* Adjust width as needed */
+  border: 1px solid #007bff; /* Example border color */
+  padding: 10px;
+  background-color: #f8f9fa; /* Light background */
+  text-align: center; /* Center text within divs */
+}
+
+.div1 {
+  background-color: #e9ecef;
+}
+
+.div2 {
+  background-color: #dee2e6;
+}
+</style>
+</head>
+<body>
+
+<div class="container">
+  <div class="div1">
+    <h1>Div 1</h1>
+    <p>This is the content of Div 1.  You can add more content here.</p>
+  </div>
+  <div class="div2">
+    <h1>Div 2</h1>
+    <p>This is the content of Div 2. Add your content here as well.</p>
+  </div>
+</div>
+
+</body>
+</html>

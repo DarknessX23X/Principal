@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title></title>
+<script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+<style>
+  body
+  {
+    margin: 0;
+    padding: 0;
+    background-color:#172537;
+
+  }
+  .hero-container {
+    display: inline-block;
+    margin: 0px;
+    text-align: center;
+  }
+  .hero-container img {
+    width: 125px;
+    height: 75px;
+    border: 2px solid transparent;
+    border-radius: 5px;
+    display: block;
+    margin: 0 auto 5px auto;
+  }
+  .hero-container .hero-id {
+    font-weight: bold;
+    margin-bottom: 5px;
+  }
+  .hero-container img.int { border-color: rgb(0, 191, 255); }
+  .hero-container img.str { border-color: red; }
+  .hero-container img.agi { border-color: green; }
+  .hero-container img.all { border-color: purple; }  
+  .hero-container .hero-id.int { color: rgb(0, 191, 255); }
+  .hero-container .hero-id.str { color: red; }
+  .hero-container .hero-id.agi { color: green; }
+  .hero-container .hero-id.all { color: purple; }
+  #loading-indicator {
+    text-align: center;
+    font-size: 1.2em;
+    margin-top: 20px;
+  }
+  .stats-container { /* New CSS class for the border */
+    border: 1px solid #ccc; /* Adjust border style as needed */
+    padding: 5px;          /* Add padding for spacing */
+  }
+
+  .int { border-color: rgb(0, 191, 255); font-weight:bold;color: white;}
+  .str { border-color: red; font-weight:bold;color: white; }
+  .agi { border-color: green; font-weight:bold;color: white; }
+  .all { border-color: purple; font-weight:bold;color: white; }
+
+
+  .container {
+  display: block;
+  align-items: center;
+}
+
+#rectangle-div {
+  width: 180px;
+  height: 180px;
+  border-radius: 90%; /* Makes the container circular */
+  overflow: hidden; /* Hides any content overflowing the circular container */
+  margin-top: 30px;
+  margin-left: 50px;
+}
+
+#rectangle-div img {
+  width: 100%; /* Makes the image fill the container */
+  height: 100%;  
+  object-fit: cover; /* Ensures the image covers the entire container */
+}
+
+#dados-div {
+  margin-top: 10px;  
+  color: white;
+  margin-left: 10px;
+}
+
+#dados-div h1 {
+  margin-left: 10px;
+  font-size: 25px;
+  text-align: center;
+}
+
+
+.black-rectangle {
+  display: flex;
+  width: 100%; /* Adjust as needed */
+  height: 250px; /* Adjust as needed */
+  background-color: #14364D; 
+  
+}
+
+
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="black-rectangle">
+      <div id="rectangle-div"></div> 
+    <div id="dados-div"></div>
+    <div id="dados-div1"></div>
+  </div> 
+  <div id="hero-data"></div>
+
+  <script>
+    let dadosGlobaisJogador = null;
+    let playerData = null;
+    let dadosBuscados = false;
+
+    
+    
+    async function getHeroData() {
+      document.getElementById('hero-data').innerHTML = '';
+
+      try {
+        const response = await axios.get('https://api.opendota.com/api/heroes');
+        const heroData = response.data;
+        heroData.sort((a, b) => a.localized_name.localeCompare(b.localized_name));
+        const heroList = document.getElementById('hero-data'); 
+
+        await getPlayerData(); 
+
+        heroData.forEach(hero => {
+          const heroContainer = document.createElement('div');
+          heroContainer.classList.add('hero-container');
+
+          const heroId = document.createElement('div');
+          heroId.classList.add('hero-id');
+          heroId.textContent = `${hero.localized_name}`;
+          heroContainer.appendChild(heroId);
+
+          const img = document.createElement('img');
+          const imageName = hero.name.replace('npc_dota_hero_', '');
+          img.src = `https://cdn.cloudflare.steamstatic.com/apps/dota2/images/dota_react/heroes/${imageName}.png`;
+          img.alt = hero.localized_name;
+          img.onerror = () => { img.style.display = 'none'; };
+          img.setAttribute('id', hero.id);
+
+          const primaryAttr = hero.primary_attr;
+          const statsDiv = document.createElement('div'); 
+          switch (primaryAttr) {
+            case 'int': img.classList.add('int'); heroId.classList.add('int');statsDiv.classList.add('int');break;
+            case 'str': img.classList.add('str'); heroId.classList.add('str');statsDiv.classList.add('str');break;
+            case 'agi': img.classList.add('agi'); heroId.classList.add('agi');statsDiv.classList.add('agi');break;
+            case 'all': img.classList.add('all'); heroId.classList.add('all');statsDiv.classList.add('all');break;
+          }
+
+          heroContainer.appendChild(img);
+
+          // Use statsDiv
+          statsDiv.classList.add('stats-container');
+          const heroStats = getHeroWins(hero.id);
+          const losses = heroStats.games - heroStats.win;
+          const winrate = heroStats.games > 0 ? ((heroStats.win / heroStats.games) * 100).toFixed(2) : 0;
+          statsDiv.innerHTML = `Jogos: ${heroStats.games}<br>Vitórias: ${heroStats.win}<br>Derrotas: ${losses}<br>Winrate: ${winrate}%`;
+          heroContainer.appendChild(statsDiv);
+
+          heroList.appendChild(heroContainer);
+        });
+
+      } catch (error) {
+        const heroList = document.getElementById('hero-data'); // Declare heroList here
+        heroList.innerHTML = `<p>Erro ao buscar dados: ${error.message}</p>`;
+        console.error(error);
+      }
+    }
+
+
+    async function getPlayerData() {
+      if (dadosBuscados) return; 
+      try {
+        const response = await axios.get('https://api.opendota.com/api/players/59643124/heroes');
+        dadosGlobaisJogador = response.data;
+        dadosBuscados = true; 
+      } catch (error) {
+        console.error('Erro ao buscar dados do jogador:', error);
+        document.getElementById('player-data').textContent = 'Erro ao buscar dados do jogador.';
+        dadosGlobaisJogador = null;
+      }
+    }
+
+    function getHeroWins(heroId) {
+      const heroData = dadosGlobaisJogador.find(hero => hero.hero_id === heroId);
+      return heroData ? { win: heroData.win, games: heroData.games } : { win: 0, games: 0 }; 
+    }
+
+  async function dados() {
+  try {
+    const response = await axios.get('https://api.opendota.com/api/players/59643124');
+    const playerData = response.data;  
+    return {name :playerData.profile.personaname, avatar :playerData.profile.avatarfull }; 
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+    return null;
+  }
+}
+
+async function dados1() {
+  try {
+    const response = await axios.get('https://api.opendota.com/api/players/59643124/wl');
+    const playerData = response.data;  
+    console.log(playerData);
+    return {win :playerData.win, lose :playerData.lose }; 
+
+  } catch (error) {
+    console.error('Erro ao buscar dados:', error);
+    return null;
+  }
+}
+
+async function updatePageTitle() {
+  try {
+    const personaname = await dados();
+    
+    //console.log(wins.win);  
+    if (personaname) {
+      const vitorias = await dados1(); 
+      document.title = `${personaname.name}`;      
+      const dados = document.getElementById('rectangle-div'); 
+      const itens = document.getElementById('dados-div'); 
+      const itens1 = document.getElementById('dados1-div'); 
+      const img = document.createElement('img');
+      const cabecalho = document.createElement('h1');
+      const Vitoria = document.createElement('h1');
+      const Derrota = document.createElement('h1');
+      const wins = document.createElement('h1');
+      img.src = `${personaname.avatar}`;
+      cabecalho.textContent =`${personaname.name}`;
+      Vitoria.textContent = 'Vitorias'; 
+      Derrota.textContent = 'Derrotas';   
+      wins.textContent = `${vitorias.win}`;
+      dados.appendChild(img);      
+      itens.appendChild(cabecalho);
+      itens.appendChild(Vitoria);
+      itens.appendChild(wins);
+
+    } else {
+      document.title = "Player Data Not Found"; // Handle case where data is not found.
+    }
+  } catch (error) {
+    console.error("Error updating page title:", error);
+    document.title = "Error Loading Player Data"; // Handle general errors.
+  }
+}
+
+updatePageTitle();
+getHeroData();
+  </script>
+</body>
+</html>
