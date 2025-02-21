@@ -3,6 +3,7 @@ import mysql.connector
 import csv
 import os
 import pandas as pd
+import numpy as np
 
 app = Flask(__name__)
 
@@ -41,7 +42,19 @@ def get_data_from_mysql(pesquisa,opcao):
                 #print("SELECT distinct(codigo) as Codigo,CONCAT(cd_grupo, ' - ', ds_grupo) as Grupo, Componente as Codigo,ds_componente as Componente FROM permissoes where Codigo like \""+pesquisa+"%\" order by cd_grupo ")
                 cursor.execute("SELECT distinct(codigo) as Codigo,Nome, CONCAT(cd_grupo, ' - ', ds_grupo) as Grupo, Componente as Codigo,ds_componente as Componente FROM permissoes where Codigo = \""+pesquisa+"\"  order by cd_grupo ")
                 column_names = [desc[0] for desc in cursor.description]
-                table_data = cursor.fetchall()         
+                table_data = cursor.fetchall()
+
+            if opcao == "Usuariospt" :
+                #print("SELECT distinct(codigo) as Codigo,CONCAT(cd_grupo, ' - ', ds_grupo) as Grupo, Componente as Codigo,ds_componente as Componente FROM permissoes where Codigo like \""+pesquisa+"%\" order by cd_grupo ")
+                cursor.execute("Select distinct(codigo) as Codigo,Nome,Componente,  ds_componente as Componente FROM permissoes where Componente like \""+pesquisa+"%\"  order by nome ")
+                column_names = [desc[0] for desc in cursor.description]
+                table_data = cursor.fetchall()  
+            if opcao == "Usuariosgp" :
+                #print("SELECT distinct(codigo) as Codigo,CONCAT(cd_grupo, ' - ', ds_grupo) as Grupo, Componente as Codigo,ds_componente as Componente FROM permissoes where Codigo like \""+pesquisa+"%\" order by cd_grupo ")
+                cursor.execute("Select distinct(codigo) as Codigo,Nome,cd_grupo as Codigo_Grupo,  ds_grupo as Grupo FROM permissoes where cd_grupo like \""+pesquisa+"%\"  order by nome ")
+                column_names = [desc[0] for desc in cursor.description]
+                table_data = cursor.fetchall()     
+
 
   # Obtém os resultados da consulta
             rows = cursor.fetchall()
@@ -87,28 +100,49 @@ def atualizar_tabelas():
         'host': '192.168.0.12',
         'database': 'kazzo',
         'raise_on_warnings': True,
-        'connection_timeout':300
+        'connection_timeout':1200
         }
+    connection = mysql.connector.connect(**config)
+
+    if connection.is_connected():
+            db_info = connection.get_server_info()
+            print(f"Conectado ao servidor MySQL versão {db_info}")
+
     caminho_atual = os.path.dirname(os.path.abspath(__file__))
+    
     caminho_arquivo_opcoes = os.path.join(caminho_atual, "LIBERACAO.CSV")
+    
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
-    data = []
-    with open(caminho_arquivo_opcoes, 'r', encoding='latin-1') as csvfile:
-        reader = csv.reader(csvfile,delimiter=";")
-    # Ignorar a primeira linha (cabeçalho)
-        next(reader)
-        for row in reader:
-        # Verificar se a linha não está vazia
-         if any(row): 
-            data.append(row)
+       
+    
+    df = pd.read_csv(
+    caminho_arquivo_opcoes,
+    encoding='latin-1',
+    delimiter=';',
+    skiprows=1,                # Ignora o cabeçalho
+    skip_blank_lines=True,     # Ignora linhas vazias
+    header=None,               # Não usar cabeçalho
+    dtype=str                  # Trata todos como string
+)
+
+# Substituir 'nan' (string) e NaN (float) por None
+    df = df.replace({'nan': None, np.nan: None})
+
+# Converter para lista
+    data = df.values.tolist()
+
+
     sql ="DELETE FROM PERMISSOES"
     cursor.execute(sql)
     connection.commit()
+    print('Deletado todas as permissoes')    
     sql ="SET GLOBAL max_allowed_packet = 1024 * 1024 * 1024"
     cursor.execute(sql)
+    print('Alterando o tamanho do pacote para 1GB')
     sql = "INSERT INTO permissoes (codigo, nome, componente,ds_componente,cd_grupo,ds_grupo) VALUES (%s, %s, %s,%s, %s, %s)"    
     cursor.executemany(sql, data)
+    print('Importado todas as permissoes')
     connection.commit()
     cursor.close()
     connection.close()

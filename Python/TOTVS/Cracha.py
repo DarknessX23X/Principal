@@ -19,7 +19,7 @@ param_value = input("Por favor, insira o nome da pessoa: ")
 param_value = param_value.upper()
 # Executar uma consulta SQL
 #cursor.execute('SELECT a.chapa,a.nome,b.telefone1,b.telefone2,b.cpf,b.dtnascimento,a.salario FROM pfunc a,ppessoa b WHERE a.nome = b.nome and a.nome like ?','%' + param_value +'%')
-cursor.execute('SELECT a.chapa, a.nome, b.telefone1, b.telefone2, b.cpf, b.dtnascimento, a.salario, b.rua FROM pfunc a, ppessoa b WHERE a.nome = b.nome AND a.nome LIKE ? ORDER BY a.chapa', (param_value + '%',))
+cursor.execute('SELECT a.chapa, a.nome, b.telefone1, b.telefone2, b.cpf, b.dtnascimento, a.salario, b.rua , b.numero,b.bairro FROM pfunc a, ppessoa b WHERE a.nome = b.nome AND a.nome LIKE ? ORDER BY a.chapa', (param_value + '%',))
 resultados = cursor.fetchall()
 # Fechar a conexão
 conn.close()
@@ -33,6 +33,8 @@ for row in resultados:
     coluna6 = row[5]
     coluna7 = row[6]
     coluna8 = row[7]
+    coluna9 = row[8]
+    coluna10 = row[9]
     
 
     print(f"CHAPA: {coluna1}")
@@ -42,5 +44,5 @@ for row in resultados:
     print(f"CPF: {coluna5}")
     print(f"Data Nascimento: {coluna6}")
     print(f"Salario: {coluna7}")
-    print(f"Endereço: {coluna8}")
+    print(f"Endereço: {coluna8},{coluna9} - {coluna10}")
     

@@ -74,20 +74,48 @@
 }
 
 #dados-div {
-  margin-top: 10px;  
+  margin-top: 25px;  
   color: white;
-  padding: auto;
+
 }
 
-#dados-div h1 {    
+
+#dados-div h2 {    
   color: white;
-  margin-left: 15px;
+  margin-left: 10px;
 }
 
 #dados-div1 {
+  gap: -100px;
+  margin: -100;
   margin-top: 70px;  
   color: white;
-  margin-left: 10px;
+  margin-left: 5px;
+}
+
+#dados-div .cabecalho {
+  font-size: 28px;
+  margin-left: 15px;
+  text-align: center;
+  color: rgb(255, 255, 255);  
+}
+
+#dados-div1 .cabecalho {
+  font-size: 25px;
+  margin-left: -40px;
+  margin-top: 35px;
+  padding: 0;
+  text-align: center;
+  color: rgb(255, 0, 0);  
+}
+
+#dados-div1 .lose {
+  font-size: 25px;
+  margin-left: -40px;
+  margin-top: 0px;
+  padding: 0;
+  text-align: center;
+  color: rgb(255, 0, 0);  
 }
 
 #dados-div h2 {
@@ -97,16 +125,8 @@
   
 }
 
-#dados-div1 h2 {
-  font-size: 25px;
-  text-align: center;
-  color: red;
-  
-}
-
 #pesquisar {
-  margin-left: 1000px;
-  align-items: flex-end;
+  margin-left: 400px;
   font-size: 25px;
   text-align: justify;
 }
@@ -121,16 +141,17 @@
 }
 
 #dados-div2 {
-  margin-left: 50px;
-  margin-top: 75px;  
+  margin-left: 10px;
+  margin-top: 70px;  
   color: white;
   padding: auto;
 }
 
-#dados-div2 h1 {
+
+#dados-div2 .cabecalho {
   font-size: 25px;
   text-align: center;
-  color: green;
+  color: rgb(255, 94, 0);
   
 }
 
@@ -139,14 +160,14 @@
 <body>
   <div class="container">
     <div class="black-rectangle">
-      <div id="rectangle-div"> </div> 
+    <div id="rectangle-div"></div> 
     <div id="dados-div"></div>
     <div id="dados-div1"></div>
-    <div id="dados-div2"><h1>Taxa de Vitórias</h1></div>
+    <div id="dados-div2"></div>
     <div id="pesquisar">
-    <input type="text" id="searchBox" placeholder="Digite sua pesquisa">
-    <button onclick="search()">Pesquisar</button>
-  </div>
+      <input type="text" id="searchBox" placeholder="Digite sua pesquisa">
+      <button onclick="search()">Pesquisar</button>
+    </div>
   </div> 
   <div id="hero-data"></div>
 
@@ -179,7 +200,6 @@
         heroData.forEach(hero => {
           const heroContainer = document.createElement('div');
           heroContainer.classList.add('hero-container');
-
           const heroId = document.createElement('div');
           heroId.classList.add('hero-id');
           heroId.textContent = `${hero.localized_name}`;
@@ -271,6 +291,7 @@ async function updatePageTitle() {
       document.getElementById('rectangle-div').innerHTML = '';
       document.getElementById('dados-div').innerHTML = '';
       document.getElementById('dados-div1').innerHTML = '';
+      document.getElementById('dados-div2').innerHTML = '';
       const vitorias = await dados1();
       document.title = `${personaname.name}`;
       const dados = document.getElementById('rectangle-div');
@@ -278,30 +299,37 @@ async function updatePageTitle() {
       const itens1 = document.getElementById('dados-div1');
       const itens2 = document.getElementById('dados-div2');
       const img = document.createElement('img');
-      const cabecalho = document.createElement('h1');
+      const cabecalho = document.createElement('h2');
       const Vitoria = document.createElement('h2');
       const Derrota = document.createElement('h2');
+      const Taxadevitorias = document.createElement('h2');
       const wins = document.createElement('h2');
       const lose = document.createElement('h2');
-      const winrate1 = vitorias.win > 0 ? ((vitorias.win / vitorias.lose) * 100).toFixed(2) : 0; //This line is correct.
+      const winrate = document.createElement('h2');
+      const winrate1 = vitorias.win > 0 ? (vitorias.win / (vitorias.win + vitorias.lose) * 100).toFixed(2) : 0; //This line is correct.
       img.src = `${personaname.avatar}`;
       cabecalho.textContent = `${personaname.name}`;
       Vitoria.textContent = 'Vitórias';
       Derrota.textContent = 'Derrotas';
+      Taxadevitorias.textContent = 'Taxa de Vitorias';
+      winrate.textContent = winrate1+'%';
       wins.textContent = `${vitorias.win}`;
       lose.textContent = `${vitorias.lose}`;
+      cabecalho.classList.add('cabecalho');
+      Derrota.classList.add('cabecalho');
+      Taxadevitorias.classList.add('cabecalho');
+      lose.classList.add('lose');
+      winrate.classList.add('winrate');
 
-      // Correction: Create a text node for winrate1
       const winrateTextNode = document.createTextNode(`${winrate1}%`); 
-      itens2.appendChild(winrateTextNode); // Append the text node
-
+      itens2.appendChild(Taxadevitorias);
+      itens2.appendChild(winrate); 
       dados.appendChild(img);
       itens.appendChild(cabecalho);
       itens.appendChild(Vitoria);
       itens1.appendChild(Derrota);
       itens.appendChild(wins);
       itens1.appendChild(lose);
-      //itens2.appendChild(winrate1); //This line was causing error.
 
     } else {
       document.title = "Player Data Not Found";

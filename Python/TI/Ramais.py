@@ -27,7 +27,7 @@ options.add_argument('--headless')
 driver = webdriver.Chrome(options)
 
 # Abre o Chrome
-driver.get("https://192.168.0.40/fop2/?exten=500&pass=500")
+driver.get("https://192.168.0.40/fop2/?exten=191&pass=191")
 time.sleep(5)
 elemento = driver.find_elements(By.CLASS_NAME,'labelname')
 

@@ -25,7 +25,7 @@ def index():
 
         # Executa a consulta com o filtro
         cursor = conn.cursor()
-        cursor.execute(f"select a.data,a.hora,a.cartao,b.NOME,c.MATRICULA from COLETAOFFLINE a,CARTOES b,FUNCIONARIOS c where b.NUM_CARTAO=a.CARTAO and c.COD_PESSOA =b.COD_PESSOA and a.data between '{data_sql_i}' and '{data_sql_f}'")
+        cursor.execute(f"select a.data,a.hora,a.numcartao,b.NOME,c.MATRICULA from bilhetes a,CARTOES b,FUNCIONARIOS c where b.NUM_CARTAO=a.NUMCARTAO and c.COD_PESSOA =b.COD_PESSOA and a.data between  '{data_sql_i}' and '{data_sql_f}'")
         results = cursor.fetchall()
         caminho = "X:\\Depto Pessoal\\Captu\\INNERGRADE.TXT"
 
