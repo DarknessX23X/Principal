@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Detalhes do Bilhete</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <style>
+        body {
+            font-family: sans-serif;
+            background-image: url('/static/img/wallpaper.jpeg');
+            background-size: cover;
+            background-repeat: no-repeat;
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            width: 300px;
+            background-color: rgba(0, 0, 0, 0.7);
+            border-radius: 10px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 20px;
+        }
+
+        h1 {
+            color: white;
+            margin-bottom: 10px;
+            text-align: center; /* Centraliza o título */
+        }
+
+
+        form {
+            width: 100%; /* Ocupa toda largura da container */
+            display: flex; /* Usa flexbox para o formulário */
+            flex-direction: column; /* Empilha itens verticalmente */
+        }
+
+        label {
+            color: white;
+            margin-bottom: 5px;
+            text-align: left; /* Alinha o label à esquerda */
+        }
+
+        .form-group { /* Adiciona uma classe para os grupos label/input */
+            width: 100%;
+            display: flex;
+            margin-bottom: 10px;
+        }
+
+        .form-group label {
+            flex: 1; /* Ocupa espaço proporcional */
+            text-align: right; /* Alinha o label à direita */
+            padding-right: 10px; /* Espaço entre label e input */
+        }
+
+        .form-group input {
+            flex: 2; /* Ocupa espaço proporcional (maior que o label) */
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.8);
+            color: black;
+            border: none;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px; /* Espaço acima do botão */
+            width: 100%; /* Botão ocupa toda largura */
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            display: block;
+            margin-top: 10px;
+            text-align: center;
+        }
+        .form-group {
+    width: 100%;
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center; /* Adiciona este para alinhar verticalmente */
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="../static/img/marcacao.png" height="125px" length="150px">
+        <h1>Detalhes do Bilhete</h1>
+        <form method="POST" action="/atualizar/{{ bilhete['Ordem'] }}">
+            <div class="form-group">
+                <label for="ordem">Ordem:</label>
+                <input type="text" id="ordem" name="ordem" value="{{ bilhete['Ordem'] }}" readonly>
+            </div>
+            <div class="form-group">
+                <label for="date">Data:</label>
+                <input type="date" id="date" name="date" value="{{ bilhete['Data'] }}">
+            </div>
+            <div class="form-group">
+                <label for="hora">Hora:</label>
+                <input type="text" id="hora" name="hora" value="{{ bilhete['HORA'] }}">
+            </div>
+            <button type="submit">Atualizar</button>
+        </form>
+        <a href="/">Voltar para a lista de bilhetes</a>
+    </div>
+</body>
+</html>

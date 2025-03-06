@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Romaneio de Tecidos</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+    <style>
+       body {
+    font-family: sans-serif;
+    background-image: url('/static/img/wallpaper.jpeg'); /* Certifique-se que a imagem existe */
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.container {
+    width: 500px;
+    max-width: 90%; /* Adapta a tela menor */
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 30px; /* Mais espaço interno */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3); /* Adiciona sombra */
+}
+
+.container img { /* Estiliza a imagem */
+    display: block; /* Ocupa toda a largura */
+    margin: 0 auto 20px; /* Centraliza e espaço abaixo */
+    max-width: 25%; /* Responsivo */
+    height: auto; /* Mantém proporção */
+}
+
+.container h1 {
+    color: white;
+    text-align: center; /* Centraliza o título */
+    margin-bottom: 20px;
+}
+
+.container label {
+    color: white;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.container input,
+.container select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    color: black;
+    border: 1px solid rgba(255, 255, 255, 0.3); /* Adiciona uma borda sutil */
+    border-radius: 5px;
+}
+
+.container input[type="submit"] { /* Estiliza o botão de envio */
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s; /* Transição suave para hover */
+}
+
+.container input[type="submit"]:hover {
+    background-color: #45a049; /* Cor do hover */
+}
+
+/* Centralizar o conteúdo usando flexbox */
+.container form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%; /* Ocupa toda largura do container */
+}
+
+.container select.centered-select {
+    padding-top: 10px; /* Ajuste este valor */
+    padding-bottom: 10px; /* Ajuste este valor */
+    line-height: 1.5; /* Ajuste este valor */
+}
+        </style>
+</head>
+<body>
+    <div class="container">  <!-- Contêiner para o formulário -->
+        <form method="POST" enctype="multipart/form-data">
+            <center>
+            <img src="../static/img/icon.png" height="10px" length="10px">
+            <label for="opcao">Escolha uma opção:</label>
+            <select id="opcao" name="opcao" >
+                <option value="Canatiba">CANATIBA</option>
+                <option value="Nicoletti">NICOLETTI</option>
+                <option value="Vicunha" selected>VICUNHA</option>
+                <option value="VicunhaAntigo">VICUNHA - ANTIGO</option>
+            </select><br><br>
+
+            <label for="info1">LOTE CLIENTE:</label>
+            <input type="text" id="info1" name="info1" required><br><br>
+
+            <label for="info2">TONALIDADE:</label>
+            <input type="text" id="info2" name="info2" required><br><br>
+
+            
+            <label for="file">PLANILHA:</label>
+            <input type="file" id="file" name="file" accept=".xlsx" required><br><br>
+
+
+            <input type="submit" value="Enviar">
+        </center>
+        </form>
+    </div>
+</body>
+</html>

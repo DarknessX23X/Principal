@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Correcao</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
+<style>
+body {
+    font-family: sans-serif;
+    background-image: url('/static/img/wallpaper.jpeg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    display: flex; /* Habilita o display flex para centralizar */
+    justify-content: center; /* Centraliza horizontalmente */
+    align-items: center; /* Centraliza verticalmente */
+    min-height: 100vh; /* Garante que o corpo ocupa toda a altura da viewport */
+    margin: 0; /* Remove margens padrão */
+}
+
+.container {
+    width: 500px; /* Largura do quadrado */
+    height: 500px; /* Altura do quadrado */
+    background-color: rgba(0, 0, 0, 0.7); /* Fundo do quadrado */
+    border-radius: 10px; /* Bordas arredondadas */
+    display: flex;
+    flex-direction: column; /* Alinha itens verticalmente */
+    justify-content: center; /* Centraliza itens verticalmente */
+    align-items: center; /* Centraliza itens horizontalmente */
+    padding: 20px; /* Adiciona preenchimento interno */
+}
+
+h1 {
+    color: white; /* Cor do texto do título */
+    margin-bottom: 10px; /* Espaço abaixo do título */
+}
+
+label {
+    color: white; /* Cor do texto do label */
+    display: block; /* Ocupa toda a largura */
+    margin-bottom: 5px; /* Espaço abaixo do label */
+}
+
+input[type="date"] {
+    width: 100%; /* Input ocupa toda a largura */
+    padding: 10px;
+    margin-bottom: 10px; /* Espaço abaixo do input */
+    background-color: rgba(255, 255, 255, 0.8); /* Cor de fundo do input */
+    color: black; /* Cor do texto do input */
+    border: none; /* Remove a borda */
+    border-radius: 5px; /* Arredonda as bordas */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <form method="POST" action="/">  <!-- Ação do formulário aponta para a rota '/' -->
+            <center>
+                <img src="../static/img/marcacao.png" height="125px" length="150px">
+            <label for="data">Data:</label>
+            <input type="date" id="datai" name="datai" required>
+            <br>
+            <button type="submit">Consultar</button>
+        </center>
+        </form>
+        <div id="results">
+            {% if data %}
+                <style>
+                    table {
+                        width: 100%;
+                        border-collapse: collapse;
+                        margin-top: 20px;
+                    }
+                    th, td {
+                        border: 1px solid #ddd;
+                        padding: 8px;
+                        text-align: left;
+                        text-align: center;
+                    }
+                    th {
+                        background-color: #020000;
+                    }
+                    tr:nth-child(even) {
+                        background-color: #030101;
+                    }
+                </style>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Ordem</th>
+                            <th>Data</th>
+                            <th>Hora</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in data %}
+                            <tr>
+                                <td><a href="/detalhes/{{ row.Ordem }}">{{ row.Ordem }}</a></td>
+                                <td>{{ row.Data }}</td>
+                                <td>{{ row.HORA }}</td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

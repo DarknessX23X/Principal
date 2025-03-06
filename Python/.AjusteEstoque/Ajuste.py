@@ -77,7 +77,10 @@ def processar_arquivo():
         if cnpj == '09041289000161':
             nome_arquivo_csv = f"{pasta_destino}/Ajuste 14.csv"
         else:
-            nome_arquivo_csv = f"{pasta_destino}/Ajuste 79.csv"    
+            if cnpj == '29846739000524':
+                nome_arquivo_csv = f"{pasta_destino}/Ajuste 29.csv" 
+            else:
+                        nome_arquivo_csv = f"{pasta_destino}/Ajuste 79.csv"            
         with open(nome_arquivo_csv, 'w', encoding='latin-1', newline='') as arquivo_csv:
             escritor_csv = csv.writer(arquivo_csv, delimiter=',')
             #escritor_csv.writerow(["Número", "Quantidade"])

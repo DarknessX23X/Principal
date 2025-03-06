@@ -1,0 +1,21 @@
+.container {
+    display: flex;
+    flex-direction: column; /* Empilha os itens verticalmente */
+    align-items: center; /* Centraliza horizontalmente */
+    justify-content: center; /* Centraliza verticalmente */
+    width: 300px; /* Largura do quadrado */
+    height: 300px; /* Altura do quadrado */
+    border: 1px solid #ccc; /* Borda opcional */
+    padding: 20px; /* Espaçamento interno */
+}
+
+.container label {
+    display: block; /* Cada label ocupa uma linha */
+    margin-bottom: 5px;
+}
+
+.container input, .container select {
+    width: 100%; /* Ocupa toda a largura do contêiner */
+    box-sizing: border-box; /* Inclui padding e border na largura */
+    margin-bottom: 10px;
+}

@@ -151,20 +151,17 @@
   </style>
 </head>
 <body>
-  <div class="container">    
-    <form method="POST">
-        <h2>CUSTO:</h2>
+  <div class="container">
+    <form id="form-informacoes" method="POST">
+      <center><h2>CUSTO:</h2></center>
       <select name="arquivo">
         {% for arquivo in arquivos %}
           <option value="{{ arquivo }}">{{ arquivo }}</option>
         {% endfor %}
       </select>
-      <button type="submit">Gerar</button>
-    </form>
-    <form id="form-informacoes" method="POST">
-        <center><h2>&nbsp;&nbsp;FORMULARIO DE RECEITA:</h2></center>
+        <center><h2>&nbsp;&nbsp;PLANILHA DE CUSTO:</h2></center>
             <div class="input-group">
-            <label for="nome">Cliente:</label>
+            <label for="nome">Usuario:</label>
             <input type="text" id="nome" name="nome" required>
             <label for="data">Data:</label>
             <input type="text" id="data" name="data" value="" required>   
@@ -176,7 +173,10 @@
             <input type="text" id="lavagem" name="lavagem" required>
             <label for="spa">SPA:</label>
             <input type="text" id="spa" name="spa" required>
+            <label for="spa">Transporte:</label>
+            <input type="text" id="Transporte" name="Transporte" required>
         </div>
+        <button type="submit">Gerar</button>
         </form> 
         <script>
             // Get the date input element
